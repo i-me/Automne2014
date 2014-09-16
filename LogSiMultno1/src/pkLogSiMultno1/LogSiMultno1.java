@@ -40,7 +40,7 @@ public class LogSiMultno1 {
 		case 12: mois="Décembre"; jours=31; break;
 		default: mois="INDEF.";break;
 		}
-		message="Il y a "+jours+" jours en "+mois+" "+annee;
+		message="Il y a --"+jours+"-- jours en "+mois+" "+annee;
 		System.out.println(message);
 	}
 
