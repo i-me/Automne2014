@@ -24,7 +24,7 @@ public class ProgLab1EX12 {
 		sortie+="*****\n";
 		sortie+="Solde courant du compte :"+argent.format(soldeToPay)+"\n";
 		sortie+="Montant minimal du paiement :"+argent.format(montantMin)+"\n";
-		JOptionPane.showMessageDialog(null, sortie, "Facture du mois de "+mois, JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, sortie, "--Facture du mois de "+mois, JOptionPane.INFORMATION_MESSAGE);
 		
 	}
 
