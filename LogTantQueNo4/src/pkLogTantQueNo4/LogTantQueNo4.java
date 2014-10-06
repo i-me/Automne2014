@@ -1,5 +1,6 @@
 package pkLogTantQueNo4;
 import javax.swing.JOptionPane;
+import java.math.*;
 public class LogTantQueNo4 {
 
 	public static boolean  chiffreOK(String sNombre)
@@ -16,7 +17,9 @@ public class LogTantQueNo4 {
 	}
 	public static int genNombre(int iLimiteInf, int iLimiteSup)
 	{
-		return(1);
+		int iValeur=iLimiteInf+(int)(Math.random()*((iLimiteSup-iLimiteInf)+1));
+		System.out.println(iValeur);
+		return(iValeur);
 	}
 	public static void main(String[] args) {
 		int iNbEssaie, iNbPartie, iNiveauFini, iNbNiveau, iLimiteInf, iLimiteSup, iChoix, iNbGen;
@@ -66,7 +69,7 @@ public class LogTantQueNo4 {
 				{
 					iLimiteInf=1;
 					iLimiteSup=10;
-					sPartMessage=": soit entre "+iLimiteInf+" et "+iLimiteSup;
+					sPartMessage=" : soit entre "+iLimiteInf+" et "+iLimiteSup;
 					iNiveauFini=0;iNbNiveau=3;
 					iNbPartie++;
 					break;
@@ -96,7 +99,7 @@ public class LogTantQueNo4 {
 
 				if(iNbSaisie>iNbGen)
 				{
-					sMessage=sErreurInf+sPartMessage;
+					sMessage=sErreurInf+" "+iNbSaisie+sPartMessage;
 					iNbEssaie++;
 				}
 				else if (iNbSaisie==-1)
@@ -106,7 +109,7 @@ public class LogTantQueNo4 {
 				}
 				else if (iNbSaisie<iNbGen)
 				{
-					sMessage=sErreurInf+sPartMessage;
+					sMessage=sErreurSup+" "+iNbSaisie+sPartMessage;
 					iNbEssaie++;
 				}
 				else if(iNbSaisie==iNbGen)
