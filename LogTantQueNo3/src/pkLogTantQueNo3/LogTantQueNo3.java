@@ -76,7 +76,38 @@ public static boolean montantOK(String sMontantTransact)
 						sAffichage="**Montant du retrait invalide**\n";
 				break;
 				}
-				
+				case 'f':
+				{
+					sAffichage="**Paiement de facture - BANQUE CACHE-CASH**";
+					sAffichage+="\nSolde actuel "+ argent.format(dSolde);
+					if(montantOK(sMontantTransact=JOptionPane.showInputDialog(sAffichage)))
+					{
+						dMontantTransact=Double.parseDouble(sMontantTransact);
+						if(dMontantTransact<=dSolde)
+						{
+							dSolde-=dMontantTransact;
+							sAffichage="**Affichage du solde**";
+							sAffichage+="\nNouveau solde "+argent.format(dSolde)+"\n";
+						}
+						else
+							sAffichage="**Montant du paiement plus élevé que le solde**\n";
+					}
+					else
+						sAffichage="**Montant du retrait invalide**\n";
+				break;
+				}
+				case 's':
+				{
+					sAffichage="**Affichage du solde - BANQUE CACHE-CASH**";
+					sAffichage+="\nSolde actuel "+argent.format(dSolde);
+					JOptionPane.showMessageDialog(null, sAffichage, "Solde - BANQUE CACHE-CASH", JOptionPane.PLAIN_MESSAGE);
+				break;
+				}
+				case 't':
+				{
+					System.exit(0);
+					break;
+				}
 				default:
 					sAffichage="**Sélection invalide**\n";
 			}
