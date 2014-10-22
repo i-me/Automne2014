@@ -20,7 +20,7 @@ public class ProgChaine1 {
 		err=false;
 		tAssSocial=""; sAssSocial2=""; tSerie1=""; tSerie2=""; iProduitSerie2=0;iSommeSerie2=0;iSommeSerie1=0;iSomme=0;
 		/*Fin réinitialisation de variables*/
-		sAssSocial=JOptionPane.showInputDialog("Saisissez le numéro d'asusrance social. Pour quitter (Q)").toLowerCase();
+		sAssSocial=JOptionPane.showInputDialog("Saisissez le numéro d'assurance social. Pour quitter (Q)").toLowerCase();
 		if(sAssSocial.charAt(0)=='q')
 		{
 			break;
