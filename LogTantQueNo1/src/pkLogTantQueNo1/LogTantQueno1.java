@@ -14,7 +14,7 @@ public class LogTantQueno1 {
 	}
 	public static void main(String[] args)
 	{
-		
+		String sMessage="";
 		int iAge=-1, iTailleGroupe=-1, iCarte=-1;
 		double dPrixTotBillet, dEscompte=0, dPrixBaseBillet=0, dPrixBillet=0,dTPS, dTVQ, dPrcntgEscompte=0, dEscompteMagic=0, dEscompteGroupe=0;
 		final float TPS=0.05f, TVQ=0.095f;
@@ -31,30 +31,17 @@ public class LogTantQueno1 {
 		{
 			iNbClients++;//Statistiques
 			/* Séquence de saisie et validation des informations reçues */
-			do
+			/*do
 			{
 				sNom=JOptionPane.showInputDialog(null,"Nom du passager", sTitre, JOptionPane.PLAIN_MESSAGE);
-			}while(sNom.equals("")!=true);
+			}while(sNom.equals("")==true);
 			do
 			{
 				sDestination=JOptionPane.showInputDialog(null,"Destination du passager", sTitre, JOptionPane.PLAIN_MESSAGE);
-			}while(sDestination.equals("")!=true);
-			do
-			{
-				sTailleGroupe=JOptionPane.showInputDialog(null,"Nombre de passagers", sTitre, JOptionPane.PLAIN_MESSAGE);
-				for(int i=0;i<sTailleGroupe.length();i++)
-				{
-					if(!Character.isDigit(sTailleGroupe.charAt(i)))
-					{
-						bErreur=true; 
-						break;
-					}
-				}
-				if(!bErreur)
-					iTailleGroupe=Integer.parseInt(sTailleGroupe);
-
-			}while(iTailleGroupe<=0);
-			bErreur=false;
+			}while(sDestination.equals("")==true);*/
+			sNom="Mohammed";
+			sDestination="Marrakech";
+			
 			do
 			{
 				sAge=JOptionPane.showInputDialog(null,"Âge du passager", sTitre, JOptionPane.PLAIN_MESSAGE);
@@ -69,6 +56,22 @@ public class LogTantQueno1 {
 				if(!bErreur)
 					iAge=Integer.parseInt(sAge);
 			}while(iAge<0);
+			bErreur=false;
+			do
+			{
+				sTailleGroupe=JOptionPane.showInputDialog(null,"Nombre total de passagers", sTitre, JOptionPane.PLAIN_MESSAGE);
+				for(int i=0;i<sTailleGroupe.length();i++)
+				{
+					if(!Character.isDigit(sTailleGroupe.charAt(i)))
+					{
+						bErreur=true; 
+						break;
+					}
+				}
+				if(!bErreur)
+					iTailleGroupe=Integer.parseInt(sTailleGroupe);
+
+			}while(iTailleGroupe<=0);
 			/*Fin de la séquence de validation*/
 			if(isBetween(iAge, 0,5))
 			{
@@ -93,7 +96,7 @@ public class LogTantQueno1 {
 				if(sCarte.charAt(0)=='o')
 				{
 					sCarte=JOptionPane.showInputDialog("Type de la carte : 0-OR, 1-Argent");
-					if(sCarte.charAt(0)==0||sCarte.charAt(0)==1)
+					if(Character.isDigit(sCarte.charAt(0)))
 						iCarte=Integer.parseInt(sCarte);
 					else
 						iCarte=-1;
@@ -111,6 +114,7 @@ public class LogTantQueno1 {
 							dEscompteMagic+=0;
 							
 					}
+					System.out.println(dEscompteMagic);
 					
 				}
 			}
@@ -138,6 +142,21 @@ public class LogTantQueno1 {
 				dPrixBillet+=dTPS+dTVQ;
 				dTotalArgentJour+=dPrixBillet;//Pour statistiques
 			/*Fin de calcul des sommes*/
+				
+				sMessage="Nom du client: "+sNom;
+				sMessage+="\nDestination: "+sDestination;
+				sMessage+="\nPrix du billet de base : "+argent.format(dPrixBaseBillet);
+				sMessage+="\nEscompte sur le prix : "+argent.format(dEscompteGroupe)+":"+argent.format(dEscompteMagic);
+				sMessage+="\nPrix Du billet après escompte:"+argent.format(dPrixBaseBillet-dEscompte);
+				sMessage+="\nPrix des taxes TPS:"+argent.format(dTPS)+", TVQ:"+argent.format(dTVQ);
+				sMessage+="\nPrix du billet final:"+argent.format(dPrixBillet);
+				JOptionPane.showMessageDialog(null,sMessage);
+				/*Réintialisation*/
+				dEscompte=dPrixBillet=dPrixBaseBillet=dTPS=dTVQ=-1;
+				dEscompteMagic=dPrcntgEscompte=0;
+				
+				/*Fin réinitialisation */
+				
 			bAClient=(JOptionPane.showConfirmDialog(null, "Autre client?", sTitre, JOptionPane.YES_NO_OPTION)==0)?true:false;
 		}
 		

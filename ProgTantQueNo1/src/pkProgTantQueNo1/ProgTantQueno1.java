@@ -15,7 +15,7 @@ public class ProgTantQueno1 {
 			
 			if(sSaisie.charAt(0)=='o')//C'est une sortie
 				break;
-			
+			if(sSaisie.charAt(0))
 				
 			System.out.println("Le résultat de l'opération " + sSaisie + " est de "+dResult);
 			dResult=0;

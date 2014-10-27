@@ -13,17 +13,19 @@ public class ProgCond5 {
 		dBalance+=iNbEtudiants*dPrixBillet;
 
 		sSortie+="Merci pour les "+iNbEtudiants+" qui ont participés au souper.\n";
-		if(iNbEtudiants>12)
+		if(iNbEtudiants>50)
 		{
-			dCoutTraiteur-=(15*iNbEtudiants);
-			iNbEtudiants-=12;
+			dCoutTraiteur-=(iNbEtudiants-(iNbEtudiants-50))*15;
+			iNbEtudiants=iNbEtudiants-50;
 			dCoutTraiteur-=(12*iNbEtudiants);
+			System.out.println(dCoutTraiteur);
+			
 		}
 		else
 			dCoutTraiteur=(-15*iNbEtudiants);
 		sSortie+="Le prix du billet était de "+dPrixBillet+" par étudiant.\n";
 		sSortie+="Le total des ventes pour le souper a été de "+ dBalance +".\n";
-		dBalance-=dCoutTraiteur;
+		dBalance+=dCoutTraiteur;
 		if(dCoutTraiteur<0)
 		{
 			sSortie+="Le comité a donc réalisé une perte de "+ dBalance +" pour le souper. On se reprend\n";

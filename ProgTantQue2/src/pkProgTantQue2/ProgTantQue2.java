@@ -74,9 +74,9 @@ public class ProgTantQue2 {//Améliorations possibles : Trim des chiffres après 2
 		sFacture+="\nMontant Total des achats    "+ (dMontantTaxable+dMontantSSTaxes);
 		
 		dTPS=(dMontantTaxable*0.05);
-		dTVQ=(dMontantTaxable*0.15);
+		dTVQ=(dMontantTaxable*0.095);
 		sFacture+="\nMontant coût TPS (5%)    "+ dTPS;
-		sFacture+="\nMontant coût TVQ (15%)    "+ dTVQ;
+		sFacture+="\nMontant coût TVQ (9,5%)    "+ dTVQ;
 		
 		dMontantTotal=(dMontantTaxable+dMontantSSTaxes)+(dTPS+dTVQ);
 		sFacture+="\nMontant total    "+ dMontantTotal;
