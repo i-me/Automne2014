@@ -6,19 +6,21 @@ public class ProgLabPile3 {
 	
 		//CSTE
 		final boolean bDEFAUTERR=true;
-		final int iDEFAUTCODEERR=2;
+		final int iCODEERREUR=2, iTETEFILE=-1, iQUEUEFILE=-1, iPOINTEURCLIENT=-1, iHEURE=0, iMINUTE=0, iSECONDE=0, iATTENTE=-1, iNBCLIENTS=0, iNbDEPARTS=0;
 		final int iTAILLEFILE=10;//Longueur Max de la file
+		final String sTITRE="", sSORTIE="", sSAISIE="", sSAISIENOM="", sSAISIEHEURE="";
+		final double dTEMPSTOTALATTENTE=0;
 		//Création de la file
-		int iPositionFile[]=new int[iTAILLEFILE],iTeteFile=-1,iQueueFile=-1, iHeure=0, iMinute=0, iSeconde=0, itAttente=-1;
-		String sInfoClients[][]=new String[iTAILLEFILE][3], stMax[]={"","-1"}, stMin[]={"","-1"}, sMenu[]={"Arrivé","Servie","Départ","Stats","Quitter le simulateur"}, sSaisie="",sSaisieNom="", sSaisieHeure="";
+		int iPositionFile[]=new int[iTAILLEFILE],iTeteFile=iTETEFILE,iQueueFile=iQUEUEFILE, iPointeurClient=iPOINTEURCLIENT, iHeure=iHEURE, iMinute=iMINUTE, iSeconde=iSECONDE, itAttente=iATTENTE;
+		String sInfoClients[][]=new String[iTAILLEFILE][3], stMax[]={"","-1"}, stMin[]={"","-1"}, sMenu[]={"Arrivé","Servie","Départ","Stats","Quitter le simulateur"}, sSaisie=sSAISIE,sSaisieNom=sSAISIENOM, sSaisieHeure=sSAISIEHEURE;
 		//Variables de stats
-		int iNbClients=0;//Nombre total de clients servis
-		double dTempsTotalAttente=0;//Contient le temps d'attente total de tous les clients ayant été servis
+		int iNbClients=iNBCLIENTS, iNbDeparts=iNbDEPARTS;//Nombre total de clients servis
+		double dTempsTotalAttente=dTEMPSTOTALATTENTE;//Contient le temps d'attente total de tous les clients ayant été servis
 		//Variables pour les fenêtres d'affichage
-		String sTitre="", sSortie="";
+		String sTitre=sTITRE, sSortie=sSORTIE;
 		//Variable gestion d'erreur ** DÉCOMMENTER LORSQUE MENUI CONSTRUIT**
 		boolean err=bDEFAUTERR;
-		int iCodeErreur=iDEFAUTCODEERR;
+		int iCodeErreur=iCODEERREUR;
 		
 		//On va remplir la table des positions. sInfoClients contient la clé de position relié à iPositionFile. iSommet servira à délimiter les limites de la file. 
 		/* une file devrait comporter une tête et une queue. Mais comme lorsqu'un client part il libère sa place, il faut décaller toutes les autres positions. Le prochains client servis est toujours le client 0*/
@@ -33,6 +35,12 @@ public class ProgLabPile3 {
 
 			sTitre="Menu principal du simulateur";
 			sSortie="Veuillez choisir une option";//Ici devra être la liste des clients et leurs positions
+			for(int i=iTeteFile;(i<=iQueueFile&&iQueueFile!=-1);i++)
+			{
+				iHeure=(Integer.parseInt(sInfoClients[i][2])-Integer.parseInt(sInfoClients[i][2])%3600)/3600;
+				iMinute=(Integer.parseInt(sInfoClients[i][2])%3600)/60;
+				sSortie+="\n#"+(i+1)+": "+sInfoClients[i][1]+" - Heure d'arrivée: "+iHeure+":"+iMinute;
+			}
 			sSaisie=String.valueOf(JOptionPane.showOptionDialog(null, sSortie, sTitre, JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, sMenu, sMenu[0]));
 			switch(Integer.parseInt(sSaisie))
 			{
@@ -64,17 +72,18 @@ public class ProgLabPile3 {
 					sInfoClients[iQueueFile][0]=String.valueOf(iQueueFile);
 					sInfoClients[iQueueFile][1]=sSaisieNom;
 					sInfoClients[iQueueFile][2]=String.valueOf(iSeconde);
+					iNbClients++;
 					if(iTeteFile==-1)
 						iTeteFile++;
 					System.out.println(sInfoClients[iQueueFile][0]+"-"+sInfoClients[iQueueFile][1]);
 				//Réinitialisaiton des variables
 					err=false;
-					iCodeErreur=0;
-					iSeconde=0;
-					iMinute=0;
-					iHeure=0;
-					sSaisieNom="";
-					sSaisieHeure="";
+					iCodeErreur=iCODEERREUR;
+					iSeconde=iSECONDE;
+					iMinute=iMINUTE;
+					iHeure=iHEURE;
+					sSaisieNom=sSAISIENOM;
+					sSaisieHeure=sSAISIEHEURE;
 				}
 				else
 				{
@@ -135,7 +144,7 @@ public class ProgLabPile3 {
 							if(itAttente<Integer.parseInt(stMin[1])||Integer.parseInt(stMin[1])==-1)
 							{
 								stMin[0]=sInfoClients[iTeteFile][1];
-								stMin[0]=String.valueOf(itAttente);
+								stMin[1]=String.valueOf(itAttente);
 							}
 							dTempsTotalAttente+=itAttente;
 							sTitre="Client servis!";
@@ -155,13 +164,13 @@ public class ProgLabPile3 {
 					err=true;
 					iCodeErreur=4;
 				}
-				sTitre="";
-				sSortie="";
-				iSeconde=0;
-				sSaisieNom="";
-				sSaisieHeure="";
-				iMinute=0;
-				iHeure=0;
+				sTitre=sTITRE;
+				sSortie=sSORTIE;
+				iSeconde=iSECONDE;
+				sSaisieNom=sSAISIENOM;
+				sSaisieHeure=sSAISIEHEURE;
+				iMinute=iMINUTE;
+				iHeure=iHEURE;
 				break;
 			case 2://Quitter de lui même
 				if(iTeteFile>-1&&iTeteFile<=iQueueFile)
@@ -171,15 +180,26 @@ public class ProgLabPile3 {
 					iCodeErreur=5;
 					for(int i=iTeteFile;i<=iQueueFile;i++)
 					{
-						if(sInfoClients[i][1]==sSaisieNom)
-						{
+						if(sInfoClients[i][1].equals(sSaisieNom)
+)						{
+							iPointeurClient=i;
 							err=false;
 							iCodeErreur=0;
 						}
 					}
 					if(!err)
 					{//Comme pas d'erreur, il faut déscendre toutes les occurences d'une et réduire la queue de 1. if(iNoduClientQuiQuitte>iTeteFile)pour s'assurer qu'il n'est pas déjà quitté
-						
+						System.out.println(iPointeurClient);
+						for(int i=iPointeurClient;i<=iQueueFile;i++)
+						{
+							System.out.println(sInfoClients[iPointeurClient][1]+"--@--"+sInfoClients[iPointeurClient+1][1]);
+							//note qu'un for aurait pu être utilisé ici plutôt que de parcourir manuellement le tableau. mais comme juste 3 positions, fuck off. 
+							sInfoClients[i][0]=sInfoClients[i+1][0];
+							sInfoClients[i][1]=sInfoClients[i+1][1];
+							sInfoClients[i][2]=sInfoClients[i+1][2];
+						}
+						iQueueFile--;
+						iNbDeparts++;
 					}
 				}
 				else
@@ -187,8 +207,18 @@ public class ProgLabPile3 {
 					err=true;
 					iCodeErreur=4;
 				}
+				//réinitialisaiton des variables utilisées
+				iPointeurClient=iPOINTEURCLIENT;
+				sSaisieNom=sSAISIENOM;
 				break;
 			case 3://Statistiques
+				sTitre="Statistiques du simulateur";
+				sSortie="-----"+sTitre+"----\n";
+				sSortie+="Nombre de personnes ayant fait la file d'attente: "+iNbClients+", (dont "+iNbDeparts+" sont partis avant d'avoir étés servis\n";
+				sSortie+="La personne ayant attendue le plus longtemps est: "+stMax[0]+", pendant "+stMax[1]+" secondes\n";
+				sSortie+="La personne ayant attendue le moins longtemps est: "+stMin[0]+", pendant "+stMin[1]+" secondes\n";
+				sSortie+="Le temps moyens d'attente dans la file en seconde est de: "+(dTempsTotalAttente/(iNbClients-iNbDeparts));
+				JOptionPane.showMessageDialog(null, sSortie, sTitre, JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case 4://Quitter le simulateur
 				err=true;
