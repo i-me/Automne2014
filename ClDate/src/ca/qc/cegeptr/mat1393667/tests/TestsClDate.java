@@ -1,5 +1,6 @@
 package ca.qc.cegeptr.mat1393667.tests;
 import ca.qc.cegeptr.mat1393667.outils.*;
+
 /**
  * *Nom:ClDate
  * *Nom des classes: ClDate
@@ -15,16 +16,17 @@ public class TestsClDate {
 
 	public static void main(String[] args) {
 
-	ClDate unDate=new ClDate();
-	ClDate deuxDate=new ClDate(10,10,2004);//Date valide
-	ClDate troisDate=new ClDate(31,02,2012);//Date invalide
+	ClDate unDate=new ClDate(4,2,2002);
+	unDate.setiJour();
+	ClDate deuxDate=new ClDate(55,2,2002);//Date valide
+	ClDate troisDate=new ClDate(4,18,2002);//Date invalide
 	System.out.println("Affichons les dates, unDate(Constructeur par défaut):"+unDate.retourChaine()+", deuxdate:"+deuxDate.retourChaine()+", troisDate(initialisé 21/02/2012, date invalide):"+troisDate.retourChaine());
 	troisDate.setiJour(28);
 	System.out.println("Corrigeons la date de troisDate ( Testons au passage setiJour)"+troisDate.retourChaine());
 	troisDate.setiAnnee(2016);
 	troisDate.setiJour(29);
 	System.out.println("Changeons l'année de troisDate pour en faire une annéee bissextile et adaptons le nombre de jours pour tester(Testons au passage setiAnnee)"+troisDate.retourChaine());
-	deuxDate.setiMois(13);
+	deuxDate.setiMois();
 	System.out.println("Tentons d'assigner deux Date le mois 13 (test des limites setiMois):"+deuxDate.getiMois());
 	deuxDate.setiMois(12);
 	System.out.println("Assignation du mois 12 pour deuxdate"+deuxDate.getiMois());

@@ -26,6 +26,12 @@ public class ClDate {
 		setiMois(iMois);
 		setiJour(iJour);
 	}
+	public ClDate(ClDate _date)
+	{
+		setiAnnee(_date.getiAnnee());
+		setiMois(_date.getiMois());
+		setiJour(_date.getiJour());
+	}
 	/*Généré automatiquement*/
 	public int getiJour() {
 		return iJour;
